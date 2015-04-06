@@ -1,0 +1,23 @@
+
+* Retrieve Stocks Module
+
+I don't know how to configure this in Windows, but a hint would be, "Scheduled Tasks".. but then
+you would need to change certain variables in the program and the line that would be added to cron.
+
+In your Linux box:
+
+You can just run the script and it will write to /tmp/PSE_data/ by default. However, if you want
+to have it run automatically every minute during trading hours, do this:
+
+1. Extract script and note the location.
+2. Add the following line to your cron file:
+   2.1 Execute "crontab -e" (without the quotes, choose whatever editor suits you, nano is recommended)
+   2.2  Add the following line, changing  <location of your script> to the appropriate value.
+==============add content after here==============
+*/1 9-12,13-16 * * 1-5 ( <location of your script>/retrieve_stock_v2.pl ) 2>&1 >> /tmp/retrieve_stock_v2.log
+==============add content before here============
+   2.3 Save ( if you have chosen nano, press CTRL + O )
+
+The location (  /tmp/PSE_data/ by default ) will be appended with the quotes every minute during trading hours.
+
+
